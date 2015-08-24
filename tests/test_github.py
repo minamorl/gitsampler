@@ -1,4 +1,8 @@
 from gitsampler import github
+from gitsampler import utils
+import os
+
+import pytest
 
 
 def test_extract_github_uri():
@@ -19,3 +23,14 @@ def test_abbr_github_uri():
 def test_clone_from():
     sample_repo_full = "git@github.com:minamorl/minamorl.com.git"
     github.clone_from(sample_repo_full)
+
+
+def test_clone_from():
+
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    sample_file = os.path.join(current_dir, 'misc/test-repos')
+    sample = utils.import_from_list(sample_file)
+
+    for uri in sample:
+        sample_repo_full = github.extract_github_uri(uri)
+        github.clone_from(sample_repo_full)

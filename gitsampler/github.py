@@ -1,4 +1,5 @@
 import git
+import os
 from parse import parse
 
 
@@ -16,4 +17,4 @@ def abbr_github_uri(uri):
 
 def clone_from(repo_uri):
     repo_name = abbr_github_uri(repo_uri)
-    git.Repo.clone_from(repo_uri, "/tmp/" + repo_name)
+    git.Repo.clone_from(repo_uri, os.path.join(os.getcwd(), "misc/repos/" , repo_name))
