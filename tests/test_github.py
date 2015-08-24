@@ -25,12 +25,7 @@ def test_clone_from():
     github.clone_from(sample_repo_full)
 
 
-def test_clone_from():
-
+def test_clone_from_file():
     current_dir = os.path.dirname(os.path.realpath(__file__))
     sample_file = os.path.join(current_dir, 'misc/test-repos')
-    sample = utils.import_from_list(sample_file)
-
-    for uri in sample:
-        sample_repo_full = github.extract_github_uri(uri)
-        github.clone_from(sample_repo_full)
+    github.clone_from_file(sample_file)

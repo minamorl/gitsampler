@@ -1,6 +1,8 @@
 import git
 import os
 from parse import parse
+from gitsampler import utils
+
 
 
 def extract_github_uri(uri):
@@ -17,4 +19,17 @@ def abbr_github_uri(uri):
 
 def clone_from(repo_uri):
     repo_name = abbr_github_uri(repo_uri)
-    git.Repo.clone_from(repo_uri, os.path.join(os.getcwd(), "misc/repos/" , repo_name))
+    dest = os.path.join(os.getcwd(), "misc/repos/", repo_name)
+    git.Repo.clone_from(repo_uri, dest)
+
+
+def clone_from_file(file):
+    def _clone_from_list(list):
+        for r in list:
+            repo_uri = extract_github_uri(r)
+            repo_name = abbr_github_uri(repo_uri)
+            dest = os.path.join(os.getcwd(), "misc/repos/", repo_name)
+            git.Repo.clone_from(repo_uri, dest)
+
+    list = utils.import_from_list(file)
+    _clone_from_list(list)
