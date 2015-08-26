@@ -4,7 +4,6 @@ from parse import parse
 from gitsampler import utils
 
 
-
 def extract_github_uri(uri):
     slashed = uri.split('@')
     if len(slashed) > 1:
@@ -20,7 +19,7 @@ def abbr_github_uri(uri):
 def clone_from(repo_uri):
     repo_name = abbr_github_uri(repo_uri)
     dest = os.path.join(os.getcwd(), "misc/repos/", repo_name)
-    git.Repo.clone_from(repo_uri, dest)
+    return git.Repo.clone_from(repo_uri, dest)
 
 
 def clone_from_file(file):
@@ -33,3 +32,9 @@ def clone_from_file(file):
 
     list = utils.import_from_list(file)
     _clone_from_list(list)
+
+
+def read_log(repo):
+    commits = repo.iter_commits('master', max_count=100)
+
+    return (c.message.rstrip("\n") for c in commits)
