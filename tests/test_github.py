@@ -1,9 +1,11 @@
 import pytest
 import os
+import logging
 from gitsampler import github
 from gitsampler import utils
 
 pytestmark = pytest.mark.usefixtures("cleandir")
+logging.basicConfig(level=logging.DEBUG)
 
 
 def test_extract_github_uri():
@@ -35,7 +37,8 @@ def test_clone_from_file():
 
 
 def test_read_log():
+    log = logging.getLogger("test_read_log")
     sample_repo_full = "git@github.com:minamorl/minamorl.com.git"
     repo = github.clone_from(sample_repo_full)
     for msg in github.read_log(repo):
-        print(msg)
+        log.debug(msg)
