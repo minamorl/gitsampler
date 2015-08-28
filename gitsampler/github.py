@@ -19,6 +19,14 @@ def abbr_github_uri(uri):
 def clone_from(repo_uri):
     repo_name = abbr_github_uri(repo_uri)
     dest = os.path.join(os.getcwd(), "misc/repos/", repo_name)
+    if os.path.exists(dest):
+        return git.Repo(dest)
+    return _clone_from(repo_uri)
+
+
+def _clone_from(repo_uri):
+    repo_name = abbr_github_uri(repo_uri)
+    dest = os.path.join(os.getcwd(), "misc/repos/", repo_name)
     return git.Repo.clone_from(repo_uri, dest)
 
 
