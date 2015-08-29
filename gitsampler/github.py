@@ -16,21 +16,19 @@ def abbr_github_uri(uri):
     return parse("git@github.com:{user}/{repo}.git", uri)["repo"]
 
 
-def clone_from(repo_uri):
+def clone_from(repo_uri, dest=None):
     repo_name = abbr_github_uri(repo_uri)
-    dest = os.path.join(os.getcwd(), "misc/repos/", repo_name)
+    dest = dest or os.path.join(os.getcwd(), "misc/repos/", repo_name)
     if os.path.exists(dest):
         return git.Repo(dest)
-    return _clone_from(repo_uri)
+    return _clone_from(repo_uri, dest)
 
 
-def _clone_from(repo_uri):
+def _clone_from(repo_uri, dest):
     repo_name = abbr_github_uri(repo_uri)
-    dest = os.path.join(os.getcwd(), "misc/repos/", repo_name)
     return git.Repo.clone_from(repo_uri, dest)
 
 
 def read_log(repo):
     commits = repo.iter_commits('master', max_count=100)
-
     return (c.message.rstrip("\n") for c in commits)

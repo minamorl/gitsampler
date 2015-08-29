@@ -2,15 +2,12 @@ import clint
 from . import github, utils, messages
 
 from functools import partialmethod
-import argparse
 
 
 def main():
-    parser = argparse.ArgumentParser(description="auto cloaning github repos")
-    parser.add_argument('--load')
-    parser.add_argument('repos', nargs='*')
-    
+    parser = utils.argparser()
     args = parser.parse_args()
+
     if args.load:
         args.repos = utils.import_from_list(args.load)
 

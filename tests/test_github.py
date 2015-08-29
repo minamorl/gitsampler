@@ -23,7 +23,6 @@ def test_abbr_github_uri():
     assert r1 == "dummy"
 
 
-@pytest.mark.slowtest
 def test_clone_from():
     sample_repo_full = "git@github.com:minamorl/minamorl.com.git"
     github.clone_from(sample_repo_full)
