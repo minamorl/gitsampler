@@ -4,13 +4,7 @@ from . import github, utils, messages
 from functools import partialmethod
 
 
-def main():
-    parser = utils.argparser()
-    args = parser.parse_args()
-
-    if args.load:
-        args.repos = utils.import_from_list(args.load)
-
+def _main(args):
     for repo_name in args.repos:
         messages.downloading(repo_name)
         uri = github.extract_github_uri(repo_name)
@@ -20,6 +14,16 @@ def main():
             print(msg)
 
         messages.done(repo_name)
+
+
+def main():
+    parser = utils.argparser()
+    args = parser.parse_args()
+
+    if args.load:
+        args.repos = utils.import_from_list(args.load)
+
+    return _main(args)
 
 
 if __name__ == "__main__":
