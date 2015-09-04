@@ -38,7 +38,7 @@ tests_require = [
 setup(
     name="gitsampler",
     author="minamorl",
-    version="0.1.1",
+    version="0.2.0",
     install_requires=install_requires,
     tests_require=['tox'],
     cmdclass={'test': Tox},
