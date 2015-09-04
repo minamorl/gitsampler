@@ -5,5 +5,5 @@ def get_redis():
 
 def save_all(redis, iterable):
     redis.flushall()
-    for i, dict in enumerate(iterable):
-        redis.hmset(i, dict)
+    for dict in iterable:
+        redis.hmset(' '.join(dict.values()) ,dict)
