@@ -1,0 +1,9 @@
+import redis
+
+def get_redis():
+    return redis.Redis(host='localhost', port=6379, db=0)
+
+def save_all(redis, iterable):
+    redis.flushall()
+    for i, dict in enumerate(iterable):
+        redis.hmset(i, dict)

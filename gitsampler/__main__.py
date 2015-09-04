@@ -1,6 +1,6 @@
 import clint
 import sys, os
-from gitsampler import github, utils, messages
+from gitsampler import github, utils, messages, redis
 import json
 import io
 
@@ -19,9 +19,9 @@ def _main(args):
 
         messages.done(repo_name)
 
+    r = redis.get_redis()
+    redis.save_all(r, logs)
 
-    if args.output:
-        json.dump(logs, open(args.output, 'w'))
 def main():
     parser = utils.setup_argparser()
     args = parser.parse_args()
