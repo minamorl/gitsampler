@@ -29,6 +29,14 @@ def _clone_from(repo_uri, dest):
     return git.Repo.clone_from(repo_uri, dest)
 
 
-def read_log(repo):
-    commits = repo.iter_commits('master', max_count=100)
-    return (c.message.rstrip("\n") for c in commits)
+def parse_commit(project_name, commit):
+    return {
+        "project": project_name,
+        "author": commit.author.name.rstrip("\n"),
+        "summary": commit.summary.rstrip("\n")
+    }
+
+
+def read_log(project_name, repo):
+    commits = repo.iter_commits('master', max_count=3000)
+    return (parse_commit(project_name, c) for c in commits)
