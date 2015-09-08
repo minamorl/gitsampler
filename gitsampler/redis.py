@@ -1,9 +1,11 @@
 import redis
 
+REDIS_PREFIX = "gitsampler:commits:"
+
 def get_redis():
-    return redis.Redis(host='localhost', port=6379, db=0)
+    return redis.StrictRedis()
 
 def save_all(redis, iterable):
     redis.flushall()
     for dict in iterable:
-        redis.hmset(' '.join(dict.values()) ,dict)
+        redis.hmset(REDIS_PREFIX + ' '.join(dict.values()) ,dict)
