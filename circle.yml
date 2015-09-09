@@ -5,7 +5,7 @@ machine:
 dependencies:
   pre:
     - pip install tox --upgrade
-    - pip uninstall gitsampler || true
+    - pip uninstall gitsampler -y || true
 test:
   override:
     - rm -rf venv
