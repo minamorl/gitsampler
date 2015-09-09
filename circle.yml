@@ -6,4 +6,4 @@ dependencies:
     - pip install tox --upgrade
 test:
   override:
-    - python setup.py test -a "tests"
+    - tox
