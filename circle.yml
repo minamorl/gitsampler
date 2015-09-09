@@ -8,5 +8,4 @@ dependencies:
     - pip uninstall gitsampler -y || true
 test:
   override:
-    - rm -rf venv
     - tox
