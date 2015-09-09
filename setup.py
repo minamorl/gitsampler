@@ -1,4 +1,5 @@
 from setuptools import setup
+from setuptools import find_packages
 from setuptools.command.test import test as TestCommand
 
 
@@ -42,7 +43,7 @@ setup(
     install_requires=install_requires,
     tests_require=['tox'],
     cmdclass={'test': Tox},
-    packages=['gitsampler'],
+    packages=find_packages(),
     entry_points={
         'console_scripts': ['gitsampler = gitsampler.__main__:main']
     },
