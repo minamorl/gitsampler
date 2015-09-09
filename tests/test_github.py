@@ -21,8 +21,3 @@ def test_abbr_github_uri():
     sample_repo_full = "git@github.com:minamorl/dummy.git"
     r1 = github.abbr_github_uri(sample_repo_full)
     assert r1 == "dummy"
-
-
-def test_clone_from():
-    sample_repo_full = "git@github.com:minamorl/minamorl.com.git"
-    github.clone_from(sample_repo_full)
