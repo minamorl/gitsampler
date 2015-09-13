@@ -5,7 +5,7 @@ machine:
 dependencies:
   pre:
     - pip install tox --upgrade
-    - pip uninstall gitsampler -y || true
+    - pip install --upgrade setuptools
 test:
   override:
     - tox
