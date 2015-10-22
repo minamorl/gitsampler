@@ -10,7 +10,7 @@ import itertools
 async def task(repo_name):
     messages.downloading(repo_name)
     uri = github.extract_github_uri(repo_name)
-    repo = await github.clone_from(uri)
+    repo = github.clone_from(uri)
     logs = list(github.read_log(repo_name, repo))
     for l in logs:
         print(l["summary"])
